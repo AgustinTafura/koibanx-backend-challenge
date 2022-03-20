@@ -8,7 +8,7 @@ const getAll = async (query) => {
     const data = await Store.find().limit(limiting).skip(skipping)
     return {
         data,
-        page: Math.max(1, page),
+        page: Math.max(page || 0),
         pages:  Math.ceil(count / limiting),
         limit: limiting,
         total: count,
@@ -16,9 +16,14 @@ const getAll = async (query) => {
 };
 
 
+const create = async (body) => {
+    let store = new Store(body)
+    return await Store.create(store)
+}
+
 
 
 module.exports = {
     getAll,
-
+    create,
 };

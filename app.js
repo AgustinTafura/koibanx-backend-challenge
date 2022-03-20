@@ -7,10 +7,16 @@ const app = express()
 const dotenv = require('dotenv');
 dotenv.config();
 const config = require('config');
+
+//Database connection
 mongoose.connect('mongodb+srv://' + config.get('mongodb.address') + '/' + config.get('mongodb.dbname'), { useNewUrlParser: true, useUnifiedTopology: true });
 require('./utils/connection').check()
 require('./utils/initializer').init()
 
+app.use(express.urlencoded({extended: true})); 
+app.use(express.json());
+
+//Routes
 app.use('/api', require('./routes/stores'));
 
 // Start the server

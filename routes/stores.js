@@ -5,6 +5,7 @@ const storesController = require('../controllers/stores')
 
 
 router.route('/stores')
-  .get(storesController.getAll);
+  .get(storesController.getAll)
+  .post(storesController.create)
 
 module.exports = router;

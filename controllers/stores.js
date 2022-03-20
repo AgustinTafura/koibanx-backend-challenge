@@ -10,9 +10,20 @@ const getAll = async (req, res, next) => {
   }
 };
 
+const create = async (req, res, next) => {
+  try {
+    const body = req.body;
+    console.log('body', body)
+    const stores = await storesService.create(body);
+    res.status(200).json(stores);
+  } catch (e) {
+    next(e)
+  }
+}
+
 
 
 module.exports = {
   getAll,
-
+  create,
 };

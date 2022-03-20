@@ -11,6 +11,9 @@ const StoreSchema = new mongoose.Schema({
 
 StoreSchema.pre('save', async function (callback) {
   //completar de ser necesario
+  let store = this;
+  console.log(store)
+
 });
 
 module.exports = mongoose.model('Store', StoreSchema);
