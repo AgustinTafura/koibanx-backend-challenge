@@ -1,9 +1,18 @@
-const Store = require('../models/store');
+const Store = require('../models/user');
 
 const getAll = async (query) => {
     const {page , limit} = query
-    const stores = await Store.find().limit(limit || 10).skip(limit || 10 * Math.max(0, page))
-    return stores;
+    const count = await Store.countDocuments()
+    const limiting = limit || 10;
+    const skipping = (page * limit) || 0;
+    const data = await Store.find().limit(limiting).skip(skipping)
+    return {
+        data,
+        page: Math.max(1, page),
+        pages:  Math.ceil(count / limiting),
+        limit: limiting,
+        total: count,
+    };
 };
 
 
