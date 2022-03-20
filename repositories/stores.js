@@ -1,4 +1,4 @@
-const Store = require('../models/stores');
+const Store = require('../models/store');
 
 const getAll = async (query) => {
     const {page , limit} = query
