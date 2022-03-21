@@ -72,6 +72,8 @@ describe('Test Stores endpoints', () => {
                 .auth(authUser.username, authUser.password)
                 .end((err, response) => {
                     response.should.have.status(500);
+                    response.body.error.message.should.include("Something failed!")
+                    response.body.error.type.should.include("Error")
                     done();
                 });
         });
