@@ -81,7 +81,8 @@ describe('Test Stores endpoints', () => {
                 .get(`/api/stores`)
                 .end((err, response) => {
                     response.should.have.status(401);
-                    response.body.message.should.include("Missing Authorization Header")
+                    response.body.error.message.should.include("Missing Authorization Header")
+                    response.body.error.type.should.include("Auth error")
                     done();
                 });
         });
@@ -92,7 +93,8 @@ describe('Test Stores endpoints', () => {
                 .auth(authUser.username, 'badPassword')
                 .end((err, response) => {
                     response.should.have.status(401);
-                    response.body.message.should.include("Invalid Authentication Credentials")
+                    response.body.error.message.should.include("Invalid Authentication Credentials")
+                    response.body.error.type.should.include("Auth error")
                     done();
                 });
         });
@@ -133,8 +135,8 @@ describe('Test Stores endpoints', () => {
                 .end((err, response) => {
                     response.should.have.status(400);
                     response.should.be.a('object');
-                    response.body.should.have.property('errors');
-                    response.body.errors.map((error) => error.should.deep.keys('msg', 'param', 'location'));
+                    response.body.should.have.property('error');
+                    response.body.error.map((error) => error.should.deep.keys('msg', 'param', 'location'));
                     done();
                 });
         });
@@ -145,7 +147,8 @@ describe('Test Stores endpoints', () => {
                 .send(store)
                 .end((err, response) => {
                     response.should.have.status(401);
-                    response.body.message.should.include("Missing Authorization Header")
+                    response.body.error.message.should.include("Missing Authorization Header")
+                    response.body.error.type.should.include("Auth error")
                     done();
                 });
         });
@@ -157,7 +160,8 @@ describe('Test Stores endpoints', () => {
                 .send(store)
                 .end((err, response) => {
                     response.should.have.status(401);
-                    response.body.message.should.include("Invalid Authentication Credentials")
+                    response.body.error.message.should.include("Invalid Authentication Credentials")
+                    response.body.error.type.should.include("Auth error")
                     done();
                 });
         });
