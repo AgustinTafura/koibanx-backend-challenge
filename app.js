@@ -12,6 +12,7 @@ const config = require('config');
 mongoose.connect('mongodb+srv://' + config.get('mongodb.address') + '/' + config.get('mongodb.dbname'), { useNewUrlParser: true, useUnifiedTopology: true });
 require('./utils/connection').check()
 require('./utils/initializer').init()
+require('./seeders/seeder').stores()
 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
