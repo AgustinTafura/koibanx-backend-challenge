@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const logger = require('./utils/logger');
+const errorHandler = require('./middlewares/errorHandler')
 mongoose.Promise = Promise;
 
 const express = require('express')
@@ -19,6 +20,10 @@ app.use(express.json());
 
 //Routes
 app.use('/api', require('./routes/stores'));
+// app.use('/api/*', (req,res,next)=> res.json('lala'));
+
+app.use(errorHandler);
+
 
 // Start the server
 app.listen(config.get('port'));
