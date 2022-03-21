@@ -6,7 +6,8 @@
   "scripts": {
     "run": "node $NODE_DEBUG_OPTION app.js",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "mocha --timeout 15000"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,9 @@
     "winston": "~2.4.0"
   },
   "devDependencies": {
+    "chai": "*",
+    "chai-http": "^4.3.0",
+    "mocha": "*",
     "nodemon": "^2.0.15"
   }
 }

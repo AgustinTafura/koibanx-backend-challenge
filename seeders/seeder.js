@@ -4,7 +4,6 @@ const storeList = require('./stores.json')
 
 const stores = async () => {
     const storesCount = await Store.countDocuments()
-    console.log('storesCount: ',storesCount)
     if (!storesCount) {
         for (const elem in storeList) {
             const data = storeList[elem];
