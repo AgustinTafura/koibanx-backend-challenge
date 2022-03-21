@@ -98,6 +98,18 @@ describe('Test Stores endpoints', () => {
                     done();
                 });
         });
+
+        it('Error Route - (route not exist)', (done) => {
+            chai.request(app)
+                .get(`/api/routenotexist`)
+                .auth(authUser.username, 'badPassword')
+                .end((err, response) => {
+                    response.should.have.status(404);
+                    response.body.error.message.should.include("Route not found")
+                    response.body.error.type.should.include("HTTP error")
+                    done();
+                });
+        });
     });
 
     describe('POST /api/stores', () => {

@@ -8,6 +8,7 @@ const app = express()
 const dotenv = require('dotenv');
 dotenv.config();
 const config = require('config');
+const HttpHandlerError = require('./errors/HttpHandlerError');
 
 //Database connection
 mongoose.connect('mongodb+srv://' + config.get('mongodb.address') + '/' + config.get('mongodb.dbname'), { useNewUrlParser: true, useUnifiedTopology: true });
@@ -20,8 +21,9 @@ app.use(express.json());
 
 //Routes
 app.use('/api', require('./routes/stores'));
-// app.use('/api/*', (req,res,next)=> res.json('lala'));
+app.use('/api/*', (req,res,next)=> next( HttpHandlerError.notFound()));
 
+//Middlewares
 app.use(errorHandler);
 
 
